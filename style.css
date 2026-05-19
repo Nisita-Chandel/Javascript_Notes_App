@@ -1,0 +1,270 @@
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family: Arial, sans-serif;
+}
+
+body{
+    background: #f4f7ff;
+    color: #333;
+}
+
+/* Navbar */
+nav{
+    background: #202021;
+    color: white;
+    padding: 15px 40px;
+    display:flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+nav button{
+    padding:8px 15px;
+    border:none;
+    border-radius:20px;
+    cursor:pointer;
+}
+
+/* Top Section */
+.top-section{
+    display:flex;
+    justify-content:center;
+    gap:15px;
+    margin:20px;
+    flex-wrap:wrap;
+}
+
+.top-section input,
+.top-section select{
+    padding:10px;
+    width:200px;
+    border-radius:10px;
+    border:1px solid gray;
+}
+
+/* Form */
+.form-container{
+    width:400px;
+    background:rgb(186, 183, 183);
+    margin:auto;
+    padding:20px;
+    border-radius:15px;
+    box-shadow:0px 4px 10px rgba(0,0,0,0.1);
+}
+
+.form-container h2{
+    text-align:center;
+    margin-bottom:15px;
+}
+
+.form-container input,
+.form-container textarea,
+.form-container select{
+    width:100%;
+    margin:10px 0;
+    padding:10px;
+    border-radius:10px;
+    border:1px solid gray;
+}
+
+textarea{
+    height:100px;
+    resize:none;
+}
+
+#addBtn{
+    width:100%;
+    background:#716ae6;
+    color:rgb(21, 4, 105);
+    border:none;
+    padding:12px;
+    border-radius:10px;
+    cursor:pointer;
+}
+
+#addBtn:hover{
+    background-color: #4b44d4;
+    transform: scale(1.03);
+    color: white;
+}
+
+#message{
+    text-align:center;
+    color:green;
+    margin-top:10px;
+}
+
+/* Notes Cards */
+#notesContainer{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin-top: 20px;
+    
+}
+   
+
+.note-card {
+    background: white;
+    padding: 20px;
+    border-radius: 18px;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.08);
+    transition: 0.3s;
+    border-left: 6px solid #6c63ff;
+}
+
+.note-card:hover {
+    transform: translateY(-8px);
+}
+
+/* Header */
+.note-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+}
+
+.note-header h3 {
+    font-size: 20px;
+    color: #333;
+}
+
+/* Description */
+.note-description {
+    color: gray;
+    margin-bottom: 15px;
+    line-height: 1.5;
+}
+
+/* Note Info */
+.note-info {
+    background: #f8f8ff;
+    padding: 10px;
+    border-radius: 10px;
+    margin-bottom: 15px;
+}
+
+.note-info p {
+    margin: 5px 0;
+}
+
+/* Priority badge */
+.priority {
+    padding: 5px 12px;
+    border-radius: 20px;
+    color: white;
+    font-size: 12px;
+    font-weight: bold;
+}
+
+.high {
+    background: red;
+}
+
+.medium {
+    background: orange;
+}
+
+.low {
+    background: green;
+}
+
+/* Buttons */
+.btn-group {
+    display: flex;
+    gap: 10px;
+}
+
+.edit-btn {
+    background: #6c63ff;
+    color: white;
+    border: none;
+    padding: 10px;
+    border-radius: 10px;
+    cursor: pointer;
+    flex: 1;
+}
+
+.delete-btn {
+    background: #ff4d4d;
+    color: white;
+    border: none;
+    padding: 10px;
+    border-radius: 10px;
+    cursor: pointer;
+    flex: 1;
+}
+
+.edit-btn:hover {
+    background: #110e2b;
+}
+
+.delete-btn:hover {
+    background: #e63939;
+}
+
+.note{
+    background-color: rgb(15, 14, 14);
+    width: 300px;
+    height: auto;
+    padding: 35px;
+    margin: 15px;
+    border-radius: 10px;
+    box-shadow: 0px 0px 10px gray;
+    border-left: 6px solid rgb(77, 77, 78);
+}
+
+.note h2{
+    margin-bottom: 10px;
+    color: white;
+}
+
+.note p{
+    margin-bottom: 10px;
+    color: white;
+}
+
+.note h4{
+    color:white;
+}
+
+.note h5{
+    margin-top: 10px;
+    color: white;
+}
+
+.deleteBtn{
+    background-color: red;
+    color: white;
+    border: none;
+    padding: 8px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 70px;
+}
+
+.deleteBtn:hover{
+    background-color: #d52e2e;
+    transform: scale(1.03);
+}
+
+
+.editBtn{
+    background-color: rgb(38, 177, 126);
+    color: white;
+    border: none;
+    padding: 8px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 70px;
+    margin-left: 60px;
+}
+
+
+.editBtn:hover{
+    background-color: #4fa03d;
+    transform: scale(1.03);
+}
