@@ -14,71 +14,102 @@ let message = document.getElementById("message");
 
 let searchInput = document.getElementById("searchInput");
 
+let deleteAllBtn = document.getElementById("deleteAllBtn");
 
-// ================= DARK MODE =================
+let notesCount = document.getElementById("notesCount");
 
-let flag = 0;
+
+
+
+let darkMode = localStorage.getItem("darkMode");
+
+if (darkMode === "enabled") {
+
+    enableDarkMode();
+
+}
 
 darkModeBtn.addEventListener("click", function () {
 
-    if (flag == 0) {
+    if (document.body.classList.contains("dark")) {
 
-        document.body.style.backgroundColor = "black";
-        document.body.style.color = "white";
-
-        charCount.style.color = "white";
-
-        flag = 1;
+        disableDarkMode();
 
     } else {
 
-        document.body.style.backgroundColor = "white";
-        document.body.style.color = "black";
-
-        charCount.style.color = "black";
-
-        flag = 0;
+        enableDarkMode();
     }
 });
 
+function enableDarkMode() {
 
-// ================= CHARACTER COUNT =================
+    document.body.classList.add("dark");
+
+    localStorage.setItem("darkMode", "enabled");
+}
+
+function disableDarkMode() {
+
+    document.body.classList.remove("dark");
+
+    localStorage.setItem("darkMode", "disabled");
+}
+
+
+
 
 description.addEventListener("input", function () {
 
     let count = description.value.length;
 
     charCount.innerText = count + "/200 Characters";
+
+    if (count > 200) {
+
+        charCount.style.color = "red";
+
+    } else {
+
+        charCount.style.color = "green";
+    }
 });
 
 
-// ================= LOAD SAVED NOTES =================
+
 
 let savedNotes = JSON.parse(localStorage.getItem("notes")) || [];
+
+savedNotes.sort((a, b) => b.id - a.id);
 
 savedNotes.forEach(function (note) {
 
     createNote(note);
-
 });
 
+updateNotesCount();
 
-// ================= ADD NOTE =================
+
+
 
 addBtn.addEventListener("click", function (event) {
 
     event.preventDefault();
 
     if (
-        title.value == "" ||
-        description.value == "" ||
-        category.value == "" ||
-        priority.value == ""
+        title.value === "" ||
+        description.value === "" ||
+        category.value === "" ||
+        priority.value === ""
     ) {
 
-        message.innerText = "All Fields Are Required";
+        showMessage("All Fields Are Required", "red");
 
-        message.style.color = "red";
+        return;
+    }
+
+    if (description.value.length > 200) {
+
+        showMessage("Description Too Long", "red");
 
         return;
     }
@@ -97,33 +128,25 @@ addBtn.addEventListener("click", function (event) {
 
         priority: priority.value,
 
+        favorite: false,
+
         date: currentDate.toLocaleDateString(),
 
         time: currentDate.toLocaleTimeString()
     };
 
-    
     let notesArray = JSON.parse(localStorage.getItem("notes")) || [];
 
-    notesArray.push(noteObj);
+    notesArray.unshift(noteObj);
 
     localStorage.setItem("notes", JSON.stringify(notesArray));
 
-    
     createNote(noteObj);
 
-    
-    message.innerText = "Notes Added Successfully";
+    updateNotesCount();
 
-    message.style.color = "green";
+    showMessage("Note Added Successfully", "green");
 
-    setTimeout(function () {
-
-        message.innerText = "";
-
-    }, 2000);
-
-    
     title.value = "";
     description.value = "";
     category.value = "";
@@ -133,13 +156,18 @@ addBtn.addEventListener("click", function (event) {
 });
 
 
-// ================= CREATE NOTE FUNCTION =================
+
 
 function createNote(noteObj) {
 
     let noteDiv = document.createElement("div");
 
     noteDiv.classList.add("note");
+
+    if (noteObj.favorite) {
+
+        noteDiv.classList.add("favorite");
+    }
 
     noteDiv.innerHTML = `
 
@@ -155,15 +183,19 @@ function createNote(noteObj) {
 
         <h6 class="time">Time : ${noteObj.time}</h6>
 
-        <button class="deleteBtn">Delete</button>
+        <button class="favoriteBtn">
+            ${noteObj.favorite ? "⭐ Unfavorite" : "⭐ Favorite"}
+        </button>
 
         <button class="editBtn">Edit</button>
+
+        <button class="deleteBtn">Delete</button>
     `;
 
-    notesContainer.appendChild(noteDiv);
+    notesContainer.prepend(noteDiv);
 
 
-    // ================= DELETE NOTE =================
+
 
     let deleteBtn = noteDiv.querySelector(".deleteBtn");
 
@@ -176,24 +208,19 @@ function createNote(noteObj) {
         notesArray = notesArray.filter(function (item) {
 
             return item.id !== noteObj.id;
-
         });
 
         localStorage.setItem("notes", JSON.stringify(notesArray));
 
-        message.innerText = "Note Deleted Successfully";
+        updateNotesCount();
 
-        message.style.color = "red";
+        checkEmptyNotes();
 
-        setTimeout(function () {
-
-            message.innerText = "";
-
-        }, 2000);
+        showMessage("Note Deleted Successfully", "red");
     });
 
 
-    // ================= EDIT NOTE =================
+
 
     let editBtn = noteDiv.querySelector(".editBtn");
 
@@ -201,9 +228,12 @@ function createNote(noteObj) {
 
         let newTitle = prompt("Enter New Title", noteObj.title);
 
-        let newDescription = prompt("Enter New Description", noteObj.description);
+        let newDescription = prompt(
+            "Enter New Description",
+            noteObj.description
+        );
 
-        if (newTitle == null || newDescription == null) {
+        if (newTitle === null || newDescription === null) {
 
             return;
         }
@@ -212,27 +242,6 @@ function createNote(noteObj) {
 
         noteObj.description = newDescription;
 
-        
-        noteDiv.innerHTML = `
-
-            <h2>${noteObj.title}</h2>
-
-            <p>${noteObj.description}</p>
-
-            <h4>Category : ${noteObj.category}</h4>
-
-            <h5>Priority : ${noteObj.priority}</h5>
-
-            <h6>Date : ${noteObj.date}</h6>
-
-            <h6>Time : ${noteObj.time}</h6>
-
-            <button class="deleteBtn">Delete</button>
-
-            <button class="editBtn">Edit</button>
-        `;
-
-        
         let notesArray = JSON.parse(localStorage.getItem("notes")) || [];
 
         notesArray = notesArray.map(function (item) {
@@ -247,25 +256,44 @@ function createNote(noteObj) {
 
         localStorage.setItem("notes", JSON.stringify(notesArray));
 
-        
         noteDiv.remove();
 
         createNote(noteObj);
 
-        message.innerText = "Note Edited Successfully";
+        showMessage("Note Edited Successfully", "green");
+    });
 
-        message.style.color = "green";
 
-        setTimeout(function () {
 
-            message.innerText = "";
 
-        }, 2000);
+    let favoriteBtn = noteDiv.querySelector(".favoriteBtn");
+
+    favoriteBtn.addEventListener("click", function () {
+
+        noteObj.favorite = !noteObj.favorite;
+
+        let notesArray = JSON.parse(localStorage.getItem("notes")) || [];
+
+        notesArray = notesArray.map(function (item) {
+
+            if (item.id === noteObj.id) {
+
+                return noteObj;
+            }
+
+            return item;
+        });
+
+        localStorage.setItem("notes", JSON.stringify(notesArray));
+
+        noteDiv.remove();
+
+        createNote(noteObj);
     });
 }
 
 
-// ================= SEARCH NOTES =================
+
 
 searchInput.addEventListener("input", function () {
 
@@ -291,7 +319,7 @@ searchInput.addEventListener("input", function () {
         }
     });
 
-    if (found == false) {
+    if (!found) {
 
         message.innerText = "Notes Not Found";
 
@@ -302,3 +330,63 @@ searchInput.addEventListener("input", function () {
         message.innerText = "";
     }
 });
+
+
+
+
+deleteAllBtn.addEventListener("click", function () {
+
+    let confirmDelete = confirm("Delete All Notes ?");
+
+    if (confirmDelete) {
+
+        localStorage.removeItem("notes");
+
+        notesContainer.innerHTML = "";
+
+        updateNotesCount();
+
+        checkEmptyNotes();
+
+        showMessage("All Notes Deleted", "red");
+    }
+});
+
+
+
+
+function updateNotesCount() {
+
+    let notesArray = JSON.parse(localStorage.getItem("notes")) || [];
+
+    notesCount.innerText = "Total Notes : " + notesArray.length;
+}
+
+
+
+
+function checkEmptyNotes() {
+
+    let notesArray = JSON.parse(localStorage.getItem("notes")) || [];
+
+    if (notesArray.length === 0) {
+
+        notesContainer.innerHTML = "<h2>No Notes Available</h2>";
+    }
+}
+
+
+
+
+function showMessage(text, color) {
+
+    message.innerText = text;
+
+    message.style.color = color;
+
+    setTimeout(function () {
+
+        message.innerText = "";
+
+    }, 2000);
+}

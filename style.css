@@ -10,7 +10,6 @@ body{
     color: #333;
 }
 
-/* Navbar */
 nav{
     background: #202021;
     color: white;
@@ -27,7 +26,6 @@ nav button{
     cursor:pointer;
 }
 
-/* Top Section */
 .top-section{
     display:flex;
     justify-content:center;
@@ -44,7 +42,6 @@ nav button{
     border:1px solid gray;
 }
 
-/* Form */
 .form-container{
     width:400px;
     background:rgb(186, 183, 183);
@@ -96,7 +93,6 @@ textarea{
     margin-top:10px;
 }
 
-/* Notes Cards */
 #notesContainer{
     display: flex;
     flex-wrap: wrap;
@@ -119,7 +115,6 @@ textarea{
     transform: translateY(-8px);
 }
 
-/* Header */
 .note-header {
     display: flex;
     justify-content: space-between;
@@ -132,14 +127,12 @@ textarea{
     color: #333;
 }
 
-/* Description */
 .note-description {
     color: gray;
     margin-bottom: 15px;
     line-height: 1.5;
 }
 
-/* Note Info */
 .note-info {
     background: #f8f8ff;
     padding: 10px;
@@ -151,7 +144,6 @@ textarea{
     margin: 5px 0;
 }
 
-/* Priority badge */
 .priority {
     padding: 5px 12px;
     border-radius: 20px;
@@ -172,7 +164,6 @@ textarea{
     background: green;
 }
 
-/* Buttons */
 .btn-group {
     display: flex;
     gap: 10px;
@@ -267,4 +258,26 @@ textarea{
 .editBtn:hover{
     background-color: #4fa03d;
     transform: scale(1.03);
+}
+
+.dark{
+    background-color: black;
+    color: white;
+}
+
+.note{
+    border: 1px solid gray;
+    padding: 20px;
+    margin: 20px;
+    border-radius: 10px;
+}
+
+.favorite{
+    border: 2px solid gold;
+}
+
+button{
+    padding: 10px;
+    margin: 5px;
+    cursor: pointer;
 }
