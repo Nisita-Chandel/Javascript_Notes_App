@@ -1,283 +1,361 @@
+/* =========================
+   GLOBAL STYLES
+========================= */
+
 *{
     margin:0;
     padding:0;
     box-sizing:border-box;
-    font-family: Arial, sans-serif;
+    font-family: 'Poppins', sans-serif;
 }
 
 body{
-    background: #f4f7ff;
-    color: #333;
+    background: linear-gradient(to right, #eef2ff, #f8f9ff);
+    color:#333;
+    min-height:100vh;
+    transition:0.3s ease;
 }
 
+/* =========================
+   NAVBAR
+========================= */
+
 nav{
-    background: #202021;
-    color: white;
-    padding: 15px 40px;
+    background: rgba(17, 24, 39, 0.9);
+    backdrop-filter: blur(10px);
+    color:white;
+    padding:18px 40px;
+
     display:flex;
-    justify-content: space-between;
-    align-items: center;
+    justify-content:space-between;
+    align-items:center;
+
+    box-shadow:0 4px 12px rgba(0,0,0,0.1);
+}
+
+nav h1{
+    font-size:28px;
+    letter-spacing:1px;
 }
 
 nav button{
-    padding:8px 15px;
+    padding:10px 18px;
     border:none;
-    border-radius:20px;
+    border-radius:30px;
+    background:#6c63ff;
+    color:white;
     cursor:pointer;
+    transition:0.3s ease;
+    font-weight:600;
 }
+
+nav button:hover{
+    background:#4f46e5;
+    transform:translateY(-2px);
+}
+
+/* =========================
+   TOP SEARCH SECTION
+========================= */
 
 .top-section{
     display:flex;
     justify-content:center;
     gap:15px;
-    margin:20px;
+    margin:30px;
     flex-wrap:wrap;
 }
 
 .top-section input,
 .top-section select{
-    padding:10px;
-    width:200px;
-    border-radius:10px;
-    border:1px solid gray;
+    padding:12px 15px;
+    width:220px;
+    border-radius:12px;
+    border:1px solid #ccc;
+    outline:none;
+    transition:0.3s ease;
+    background:white;
 }
+
+.top-section input:focus,
+.top-section select:focus{
+    border-color:#6c63ff;
+    box-shadow:0 0 8px rgba(108,99,255,0.3);
+}
+
+/* =========================
+   FORM CONTAINER
+========================= */
 
 .form-container{
     width:400px;
-    background:rgb(186, 183, 183);
     margin:auto;
-    padding:20px;
-    border-radius:15px;
-    box-shadow:0px 4px 10px rgba(0,0,0,0.1);
+    padding:25px;
+
+    background: rgba(255,255,255,0.7);
+    backdrop-filter: blur(12px);
+
+    border-radius:20px;
+
+    box-shadow:0 8px 25px rgba(0,0,0,0.08);
 }
 
 .form-container h2{
     text-align:center;
-    margin-bottom:15px;
+    margin-bottom:20px;
+    color:#4f46e5;
 }
 
 .form-container input,
 .form-container textarea,
 .form-container select{
     width:100%;
-    margin:10px 0;
-    padding:10px;
-    border-radius:10px;
-    border:1px solid gray;
+    margin:12px 0;
+    padding:12px;
+
+    border-radius:12px;
+    border:1px solid #ccc;
+    outline:none;
+
+    transition:0.3s ease;
+}
+
+.form-container input:focus,
+.form-container textarea:focus,
+.form-container select:focus{
+    border-color:#6c63ff;
+    box-shadow:0 0 8px rgba(108,99,255,0.3);
 }
 
 textarea{
-    height:100px;
+    height:120px;
     resize:none;
 }
 
+/* =========================
+   ADD BUTTON
+========================= */
+
 #addBtn{
     width:100%;
-    background:#716ae6;
-    color:rgb(21, 4, 105);
+    padding:14px;
+
     border:none;
-    padding:12px;
-    border-radius:10px;
+    border-radius:12px;
+
+    background: linear-gradient(to right, #6c63ff, #4f46e5);
+    color:white;
+
+    font-size:16px;
+    font-weight:600;
+
     cursor:pointer;
+    transition:0.3s ease;
 }
 
 #addBtn:hover{
-    background-color: #4b44d4;
-    transform: scale(1.03);
-    color: white;
+    transform:translateY(-3px);
+    box-shadow:0 8px 18px rgba(108,99,255,0.4);
 }
+
+/* =========================
+   MESSAGE
+========================= */
 
 #message{
     text-align:center;
+    margin-top:15px;
     color:green;
-    margin-top:10px;
+    font-weight:600;
 }
+
+/* =========================
+   NOTES CONTAINER
+========================= */
 
 #notesContainer{
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    margin-top: 20px;
-    
-}
-   
-
-.note-card {
-    background: white;
-    padding: 20px;
-    border-radius: 18px;
-    box-shadow: 0 8px 20px rgba(0,0,0,0.08);
-    transition: 0.3s;
-    border-left: 6px solid #6c63ff;
+    display:flex;
+    justify-content:center;
+    flex-wrap:wrap;
+    gap:25px;
+    margin:40px;
 }
 
-.note-card:hover {
-    transform: translateY(-8px);
-}
-
-.note-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 15px;
-}
-
-.note-header h3 {
-    font-size: 20px;
-    color: #333;
-}
-
-.note-description {
-    color: gray;
-    margin-bottom: 15px;
-    line-height: 1.5;
-}
-
-.note-info {
-    background: #f8f8ff;
-    padding: 10px;
-    border-radius: 10px;
-    margin-bottom: 15px;
-}
-
-.note-info p {
-    margin: 5px 0;
-}
-
-.priority {
-    padding: 5px 12px;
-    border-radius: 20px;
-    color: white;
-    font-size: 12px;
-    font-weight: bold;
-}
-
-.high {
-    background: red;
-}
-
-.medium {
-    background: orange;
-}
-
-.low {
-    background: green;
-}
-
-.btn-group {
-    display: flex;
-    gap: 10px;
-}
-
-.edit-btn {
-    background: #6c63ff;
-    color: white;
-    border: none;
-    padding: 10px;
-    border-radius: 10px;
-    cursor: pointer;
-    flex: 1;
-}
-
-.delete-btn {
-    background: #ff4d4d;
-    color: white;
-    border: none;
-    padding: 10px;
-    border-radius: 10px;
-    cursor: pointer;
-    flex: 1;
-}
-
-.edit-btn:hover {
-    background: #110e2b;
-}
-
-.delete-btn:hover {
-    background: #e63939;
-}
+/* =========================
+   NOTE CARD
+========================= */
 
 .note{
-    background-color: rgb(15, 14, 14);
-    width: 300px;
-    height: auto;
-    padding: 35px;
-    margin: 15px;
-    border-radius: 10px;
-    box-shadow: 0px 0px 10px gray;
-    border-left: 6px solid rgb(77, 77, 78);
+    width:320px;
+    padding:22px;
+
+    border-radius:20px;
+
+    background: rgba(255,255,255,0.8);
+    backdrop-filter: blur(12px);
+
+    box-shadow:0 10px 25px rgba(0,0,0,0.08);
+
+    transition:0.3s ease;
+
+    border-left:6px solid #6c63ff;
+}
+
+.note:hover{
+    transform:translateY(-8px);
 }
 
 .note h2{
-    margin-bottom: 10px;
-    color: white;
+    margin-bottom:12px;
+    color:#222;
 }
 
 .note p{
-    margin-bottom: 10px;
-    color: white;
+    margin-bottom:12px;
+    line-height:1.5;
+    color:#555;
 }
 
-.note h4{
-    color:white;
-}
-
+.note h4,
 .note h5{
-    margin-top: 10px;
-    color: white;
+    margin-top:8px;
+    color:#444;
 }
+
+/* =========================
+   PRIORITY COLORS
+========================= */
+
+.high{
+    color:#ff4d4d;
+    font-weight:bold;
+}
+
+.medium{
+    color:#ff9800;
+    font-weight:bold;
+}
+
+.low{
+    color:#28a745;
+    font-weight:bold;
+}
+
+/* =========================
+   BUTTON GROUP
+========================= */
+
+.btn-group{
+    display:flex;
+    gap:10px;
+    margin-top:18px;
+}
+
+/* EDIT BUTTON */
+
+.editBtn{
+    flex:1;
+
+    background:#6c63ff;
+    color:white;
+
+    border:none;
+    padding:10px;
+
+    border-radius:10px;
+    cursor:pointer;
+
+    transition:0.3s ease;
+}
+
+.editBtn:hover{
+    background:#4f46e5;
+}
+
+/* DELETE BUTTON */
 
 .deleteBtn{
-    background-color: red;
-    color: white;
-    border: none;
-    padding: 8px 15px;
-    border-radius: 5px;
-    cursor: pointer;
-    margin-top: 70px;
+    flex:1;
+
+    background:#ff4d4d;
+    color:white;
+
+    border:none;
+    padding:10px;
+
+    border-radius:10px;
+    cursor:pointer;
+
+    transition:0.3s ease;
 }
 
 .deleteBtn:hover{
-    background-color: #d52e2e;
-    transform: scale(1.03);
+    background:#e63939;
 }
 
-
-.editBtn{
-    background-color: rgb(38, 177, 126);
-    color: white;
-    border: none;
-    padding: 8px 15px;
-    border-radius: 5px;
-    cursor: pointer;
-    margin-top: 70px;
-    margin-left: 60px;
-}
-
-
-.editBtn:hover{
-    background-color: #4fa03d;
-    transform: scale(1.03);
-}
-
-.dark{
-    background-color: black;
-    color: white;
-}
-
-.note{
-    border: 1px solid gray;
-    padding: 20px;
-    margin: 20px;
-    border-radius: 10px;
-}
+/* =========================
+   FAVORITE NOTE
+========================= */
 
 .favorite{
-    border: 2px solid gold;
+    border:2px solid gold;
+    box-shadow:0 0 15px rgba(255,215,0,0.5);
 }
 
-button{
-    padding: 10px;
-    margin: 5px;
-    cursor: pointer;
+/* =========================
+   DARK MODE
+========================= */
+
+.dark{
+    background:#0f172a;
+    color:white;
+}
+
+.dark .form-container{
+    background:rgba(30,41,59,0.8);
+    color:white;
+}
+
+.dark .note{
+    background:rgba(30,41,59,0.9);
+}
+
+.dark .note h2,
+.dark .note p,
+.dark .note h4,
+.dark .note h5{
+    color:white;
+}
+
+.dark input,
+.dark textarea,
+.dark select{
+    background:#1e293b;
+    color:white;
+    border:1px solid #475569;
+}
+
+/* =========================
+   RESPONSIVE DESIGN
+========================= */
+
+@media(max-width:500px){
+
+    .form-container{
+        width:90%;
+    }
+
+    .top-section input,
+    .top-section select{
+        width:100%;
+    }
+
+    .note{
+        width:90%;
+    }
+
+    nav{
+        flex-direction:column;
+        gap:10px;
+    }
 }
